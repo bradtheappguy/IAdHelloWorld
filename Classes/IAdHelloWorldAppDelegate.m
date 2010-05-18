@@ -18,17 +18,20 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
-	UIViewController *viewController = [[UIViewController alloc] init];
-	
 	
 	ADBannerView *adView = [[ADBannerView alloc] initWithFrame:CGRectZero];
 	adView.requiredContentSizeIdentifiers = [NSSet setWithObject:ADBannerContentSizeIdentifier320x50];
 	adView.currentContentSizeIdentifier = ADBannerContentSizeIdentifier320x50;
 	adView.center = CGPointMake(window.frame.size.width/2, (window.frame.size.height - adView.frame.size.height/2) -20);
 	adView.delegate = self;
+	
+	//All ADBannerViews must be inside a ViewController
+	UIViewController *viewController = [[UIViewController alloc] init];
 	[viewController.view addSubview:adView];
+	[adView release];
 	
 	[window addSubview:viewController.view];
+	[viewController release];
     [window makeKeyAndVisible];
 	
 	return YES;
